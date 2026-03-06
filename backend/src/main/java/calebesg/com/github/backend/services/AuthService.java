@@ -2,6 +2,8 @@ package calebesg.com.github.backend.services;
 
 import calebesg.com.github.backend.domain.user.User;
 import calebesg.com.github.backend.dto.AuthResponseDTO;
+import calebesg.com.github.backend.infrastructure.exception.InvalidPasswordException;
+import calebesg.com.github.backend.infrastructure.exception.UserNotFoundException;
 import calebesg.com.github.backend.infrastructure.security.TokenService;
 import calebesg.com.github.backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +20,10 @@ public class AuthService {
     private final TokenService tokenService;
 
     public AuthResponseDTO login(String email, String password) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Wrong password!");
+            throw new InvalidPasswordException();
         }
 
         String token = tokenService.createToken(user);
