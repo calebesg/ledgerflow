@@ -1,6 +1,13 @@
 package calebesg.com.github.backend.infrastructure.exception;
 
-import org.springframework.http.HttpStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
 
-public record RestErrorMessage(HttpStatus status, String message) {
+public record RestErrorMessage(
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        LocalDateTime timestamp,
+        int status,
+        String error,
+        String message,
+        String path) {
 }
