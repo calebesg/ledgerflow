@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,6 +34,6 @@ public class Transaction {
 
     private String description;
     private BigDecimal amount;
-    private LocalDateTime transactionDate;
+    private LocalDate transactionDate;
     private LocalDateTime deletedAt;
 }
