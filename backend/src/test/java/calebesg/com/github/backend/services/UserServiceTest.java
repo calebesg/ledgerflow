@@ -1,8 +1,7 @@
 package calebesg.com.github.backend.services;
 
-import calebesg.com.github.backend.domain.user.User;
+import calebesg.com.github.backend.domain.entity.User;
 import calebesg.com.github.backend.repositories.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

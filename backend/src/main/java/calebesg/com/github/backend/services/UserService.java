@@ -1,6 +1,6 @@
 package calebesg.com.github.backend.services;
 
-import calebesg.com.github.backend.domain.user.User;
+import calebesg.com.github.backend.domain.entity.User;
 import calebesg.com.github.backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

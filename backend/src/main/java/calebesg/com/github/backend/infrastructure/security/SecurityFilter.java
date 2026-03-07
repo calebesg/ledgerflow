@@ -1,6 +1,6 @@
 package calebesg.com.github.backend.infrastructure.security;
 
-import calebesg.com.github.backend.domain.user.User;
+import calebesg.com.github.backend.domain.entity.User;
 import calebesg.com.github.backend.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

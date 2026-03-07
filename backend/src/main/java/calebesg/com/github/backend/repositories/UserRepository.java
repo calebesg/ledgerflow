@@ -1,6 +1,6 @@
 package calebesg.com.github.backend.repositories;
 
-import calebesg.com.github.backend.domain.user.User;
+import calebesg.com.github.backend.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

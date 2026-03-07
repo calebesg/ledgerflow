@@ -1,6 +1,6 @@
 package calebesg.com.github.backend.services;
 
-import calebesg.com.github.backend.domain.user.User;
+import calebesg.com.github.backend.domain.entity.User;
 import calebesg.com.github.backend.dto.AuthResponseDTO;
 import calebesg.com.github.backend.infrastructure.exception.InvalidCredentialsException;
 import calebesg.com.github.backend.infrastructure.security.TokenService;

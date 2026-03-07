@@ -1,4 +1,4 @@
-package calebesg.com.github.backend.domain.user;
+package calebesg.com.github.backend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
