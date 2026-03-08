@@ -4,7 +4,9 @@
 
 @theme {
   --color-primary: #7001fd;
+  --color-purple-shadow: #7001fd33;
   --color-text: #555555;
+  --color-text-smooth: #c2c2c2cc;
   --color-secondary: #1e2772;
   --color-background-gray: #eeeeee;
 }
