@@ -4,6 +4,7 @@ import calebesg.com.github.backend.domain.entity.Transaction;
 import calebesg.com.github.backend.domain.entity.User;
 import calebesg.com.github.backend.dto.TransactionRequestDTO;
 import calebesg.com.github.backend.dto.TransactionResponseDTO;
+import calebesg.com.github.backend.infrastructure.exception.TransactionNotFoundException;
 import calebesg.com.github.backend.infrastructure.exception.UserNotFoundException;
 import calebesg.com.github.backend.infrastructure.security.TokenService;
 import calebesg.com.github.backend.repositories.TransactionRepository;
@@ -43,9 +44,10 @@ public class TransactionService {
 
     public void deleteTransaction(Long id) {
         User user = userService.getAuthenticatedUser();
+
         Transaction transaction = transactionRepository
                 .findByUser_IdAndIdAndDeletedAtIsNull(user.getId(), id)
-                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+                .orElseThrow(TransactionNotFoundException::new);
 
         transaction.setDeletedAt(LocalDateTime.now());
         transactionRepository.save(transaction);
