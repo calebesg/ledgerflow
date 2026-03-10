@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PrimaryButton } from '../primary-button/primary-button';
 import { SecondaryButton } from '../secondary-button/secondary-button';
 
@@ -12,4 +12,15 @@ export class DefaultLoginLayout {
   @Input() pageTitle: string = '';
   @Input() primaryButtonText: string = '';
   @Input() secondaryButtonText: string = '';
+
+  @Output('submit') onSubmit = new EventEmitter();
+  @Output('navigate') onNavigate = new EventEmitter();
+
+  submit() {
+    this.onSubmit.emit();
+  }
+
+  navigate() {
+    this.onNavigate.emit();
+  }
 }

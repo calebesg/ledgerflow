@@ -2,6 +2,8 @@
   pageTitle="Entre com sua conta"
   primaryButtonText="Entrar"
   secondaryButtonText="Cadastre-se"
+  (submit)="submit()"
+  (navigate)="navigate()"
 >
   <form [formGroup]="loginForm" class="w-full flex flex-col mt-12 gap-6">
     <app-primary-input formName="email" type="email" label="E-mail" placeholder="Digite seu E-mail">

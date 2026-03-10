@@ -5,7 +5,11 @@
 
     <ng-content></ng-content>
 
-    <app-primary-button class="w-full mt-8" text="{{ primaryButtonText }}"></app-primary-button>
+    <app-primary-button
+      (click)="submit()"
+      class="w-full mt-8"
+      text="{{ primaryButtonText }}"
+    ></app-primary-button>
 
     <div class="text-text-smooth text-sm flex w-full items-center gap-3.5 mt-7">
       <div class="grow h-px bg-text-smooth"></div>
@@ -14,6 +18,7 @@
     </div>
 
     <app-secondary-button
+      (click)="navigate()"
       class="w-full mt-7"
       text="{{ secondaryButtonText }}"
     ></app-secondary-button>
