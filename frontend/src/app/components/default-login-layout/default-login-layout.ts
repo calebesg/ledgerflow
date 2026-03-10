@@ -9,7 +9,7 @@ import { SecondaryButton } from '../secondary-button/secondary-button';
   styleUrl: './default-login-layout.css',
 })
 export class DefaultLoginLayout {
-  @Input() title: string = '';
+  @Input() pageTitle: string = '';
   @Input() primaryButtonText: string = '';
   @Input() secondaryButtonText: string = '';
 }

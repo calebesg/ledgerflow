@@ -9,6 +9,9 @@
   --color-text-smooth: #c2c2c2cc;
   --color-secondary: #1e2772;
   --color-background-gray: #eeeeee;
+  --color-light-gray: #f1f3f6;
+
+  --default-font-family: 'Poppins';
 }
 
 body {

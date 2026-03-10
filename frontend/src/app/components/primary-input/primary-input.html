@@ -1,0 +1,16 @@
+<div class="flex flex-col">
+  <label class="text-text text-md mb-2.5" [for]="formName">{{ label }}</label>
+
+  <div class="w-full flex">
+    <input
+      class="w-full h-12 rounded-l-lg bg-light-gray p-3 text-md placeholder:text-tex outline-0"
+      [type]="type"
+      [formControlName]="formName"
+      [placeholder]="placeholder"
+      required
+    />
+    <div class="rounded-r-lg p-3 bg-primary">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

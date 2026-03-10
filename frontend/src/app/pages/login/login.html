@@ -1,16 +1,22 @@
 <app-default-login-layout
-  title="Entre com sua conta"
+  pageTitle="Entre com sua conta"
   primaryButtonText="Entrar"
   secondaryButtonText="Cadastre-se"
 >
-  <form action="#">
-    <div>
-      <label for="email">E-mail</label>
-      <input type="text" id="email" type="email" placeholder="Digite seu e-mail" required />
-    </div>
-    <div>
-      <label for="password">Senha</label>
-      <input type="text" id="password" type="password" placeholder="Digite sua senha" required />
-    </div>
+  <form [formGroup]="loginForm" class="w-full flex flex-col mt-12 gap-6">
+    <app-primary-input formName="email" type="email" label="E-mail" placeholder="Digite seu E-mail">
+      <img class="h-5" src="icons/email.svg" aria-hidden="true" />
+    </app-primary-input>
+    <app-primary-input
+      formName="password"
+      type="password"
+      label="Senha"
+      placeholder="Digite sua Senha"
+    >
+      <img class="h-5" src="icons/lock.svg" aria-hidden="true" />
+    </app-primary-input>
   </form>
+  <a class="w-full text-end mt-2.5 text-sm text-secondary cursor-pointer hover:opacity-80">
+    Esqueceu a senha?
+  </a>
 </app-default-login-layout>
