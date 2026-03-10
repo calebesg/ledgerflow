@@ -2,9 +2,6 @@ package calebesg.com.github.backend.controllers;
 
 import calebesg.com.github.backend.dto.TransactionRequestDTO;
 import calebesg.com.github.backend.dto.TransactionResponseDTO;
-import calebesg.com.github.backend.infrastructure.security.TokenService;
-import calebesg.com.github.backend.repositories.TransactionRepository;
-import calebesg.com.github.backend.repositories.UserRepository;
 import calebesg.com.github.backend.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +16,6 @@ import java.util.List;
 @RequestMapping("/transaction")
 public class TransactionController {
 
-    private final TransactionRepository transactionRepository;
-    private final UserRepository userRepository;
-    private final TokenService tokenService;
     private final TransactionService transactionService;
 
     @PostMapping("/new")
@@ -32,5 +26,11 @@ public class TransactionController {
     @GetMapping("/list")
     public ResponseEntity<List<TransactionResponseDTO>> getTransactions(@RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(transactionService.getAllTransactions(token));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTransaction(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+        transactionService.deleteTransaction(id, token);
+        return ResponseEntity.noContent().build();
     }
 }

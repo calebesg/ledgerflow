@@ -11,7 +11,9 @@ import calebesg.com.github.backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +38,19 @@ public class TransactionService {
 
     public List<TransactionResponseDTO> getAllTransactions(String token) {
         User user = userRepository.findByEmail(tokenService.validateToken(token)).orElseThrow(UserNotFoundException::new);
-        List<Transaction> transactions = transactionRepository.findByUser_Id(user.getId());
+        List<Transaction> transactions = transactionRepository.findByUser_IdAndDeletedAtIsNull(user.getId());
         return transactions.stream().map(TransactionResponseDTO::fromEntity).toList();
+    }
+
+    public void deleteTransaction(Long id, String token) {
+        User user = userRepository.findByEmail(tokenService.validateToken(token)).orElseThrow(UserNotFoundException::new);
+        Optional<Transaction> transaction = transactionRepository.findByUser_IdAndIdAndDeletedAtIsNull(user.getId(), id);
+
+        if (transaction.isEmpty()) {
+            throw new RuntimeException("Transaction not found");
+        }
+
+        transaction.get().setDeletedAt(LocalDateTime.now());
+        transactionRepository.save(transaction.get());
     }
 }
