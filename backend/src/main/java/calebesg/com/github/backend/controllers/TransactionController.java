@@ -19,18 +19,18 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping("/new")
-    public ResponseEntity<TransactionResponseDTO> createTransaction(@RequestBody TransactionRequestDTO body, @RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(transactionService.createTransaction(body, token));
+    public ResponseEntity<TransactionResponseDTO> createTransaction(@RequestBody TransactionRequestDTO body) {
+        return ResponseEntity.ok(transactionService.createTransaction(body));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<TransactionResponseDTO>> getTransactions(@RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(transactionService.getAllTransactions(token));
+    public ResponseEntity<List<TransactionResponseDTO>> getTransactions() {
+        return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTransaction(@PathVariable Long id, @RequestHeader("Authorization") String token) {
-        transactionService.deleteTransaction(id, token);
+    public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
+        transactionService.deleteTransaction(id);
         return ResponseEntity.noContent().build();
     }
 }

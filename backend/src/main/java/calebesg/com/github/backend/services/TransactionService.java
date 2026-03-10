@@ -20,11 +20,10 @@ import java.util.Optional;
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
-    private final UserRepository userRepository;
-    private final TokenService tokenService;
+    private final UserService userService;
 
-    public TransactionResponseDTO createTransaction(TransactionRequestDTO dataTransaction, String token) {
-        User user = userRepository.findByEmail(tokenService.validateToken(token)).orElseThrow(UserNotFoundException::new);
+    public TransactionResponseDTO createTransaction(TransactionRequestDTO dataTransaction) {
+        User user = userService.getAuthenticatedUser();
 
         var transaction = new Transaction();
         transaction.setTransactionDate(dataTransaction.dataTransaction());
@@ -36,21 +35,19 @@ public class TransactionService {
         return TransactionResponseDTO.fromEntity(transactionRepository.save(transaction));
     }
 
-    public List<TransactionResponseDTO> getAllTransactions(String token) {
-        User user = userRepository.findByEmail(tokenService.validateToken(token)).orElseThrow(UserNotFoundException::new);
+    public List<TransactionResponseDTO> getAllTransactions() {
+        User user = userService.getAuthenticatedUser();
         List<Transaction> transactions = transactionRepository.findByUser_IdAndDeletedAtIsNull(user.getId());
         return transactions.stream().map(TransactionResponseDTO::fromEntity).toList();
     }
 
-    public void deleteTransaction(Long id, String token) {
-        User user = userRepository.findByEmail(tokenService.validateToken(token)).orElseThrow(UserNotFoundException::new);
-        Optional<Transaction> transaction = transactionRepository.findByUser_IdAndIdAndDeletedAtIsNull(user.getId(), id);
+    public void deleteTransaction(Long id) {
+        User user = userService.getAuthenticatedUser();
+        Transaction transaction = transactionRepository
+                .findByUser_IdAndIdAndDeletedAtIsNull(user.getId(), id)
+                .orElseThrow(() -> new RuntimeException("Transaction not found"));
 
-        if (transaction.isEmpty()) {
-            throw new RuntimeException("Transaction not found");
-        }
-
-        transaction.get().setDeletedAt(LocalDateTime.now());
-        transactionRepository.save(transaction.get());
+        transaction.setDeletedAt(LocalDateTime.now());
+        transactionRepository.save(transaction);
     }
 }
