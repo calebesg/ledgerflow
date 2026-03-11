@@ -3,7 +3,7 @@
   primaryButtonText="Cadastrar"
   secondaryButtonText="Entrar"
   (submit)="submit()"
-  (navigate)="navigate()"
+  (navigate)="navigateToLogin()"
   [disablePrimaryButton]="!signUpForm.invalid"
 >
   <form [formGroup]="signUpForm" class="w-full flex flex-col mt-12 gap-5">

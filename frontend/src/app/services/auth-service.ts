@@ -7,15 +7,27 @@ import { LoginResponse } from '../types/login-response.type';
   providedIn: 'root',
 })
 export class AuthService {
+  private BASE_URL: string = 'http://localhost:8080';
+
   constructor(private httpClient: HttpClient) {}
 
   login(email: string, password: string) {
     return this.httpClient
-      .post<LoginResponse>('http://localhost:8080/auth/login', { email, password })
-      .pipe(
-        tap((value) => {
-          sessionStorage.setItem('auth-token', value.token);
-        }),
-      );
+      .post<LoginResponse>(`${this.BASE_URL}/auth/login`, { email, password })
+      .pipe(tap(this.saveToken));
+  }
+
+  register(name: string, email: string, password: string) {
+    return this.httpClient
+      .post<LoginResponse>(`${this.BASE_URL}/auth/register`, {
+        name,
+        email,
+        password,
+      })
+      .pipe(tap(this.saveToken));
+  }
+
+  private saveToken({ token }: LoginResponse) {
+    sessionStorage.setItem('auth-token', token);
   }
 }
