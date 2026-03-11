@@ -7,9 +7,6 @@ import { LoginResponse } from '../types/login-response.type';
   providedIn: 'root',
 })
 export class AuthService {
-  token: string = '';
-  name: string = '';
-
   constructor(private httpClient: HttpClient) {}
 
   login(email: string, password: string) {
@@ -18,8 +15,6 @@ export class AuthService {
       .pipe(
         tap((value) => {
           sessionStorage.setItem('auth-token', value.token);
-          this.token = value.token;
-          this.name = value.name;
         }),
       );
   }

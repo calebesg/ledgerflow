@@ -1,5 +1,7 @@
 <div class="flex flex-col">
-  <label class="text-text text-md mb-2.5" [for]="formName">{{ label }}</label>
+  @if (label) {
+    <label class="text-text text-md mb-2.5" [for]="formName">{{ label }}</label>
+  }
 
   <div class="w-full flex">
     <input

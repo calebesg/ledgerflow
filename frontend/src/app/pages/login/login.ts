@@ -5,6 +5,8 @@ import { PrimaryInput } from '../../components/primary-input/primary-input';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
+import { LoginErrorResponse } from '../../types/login-response.type';
 
 type LoginForm = {
   email: string;
@@ -35,19 +37,17 @@ export class Login {
   submit() {
     if (this.loginForm.invalid) return;
 
-    console.log(this.loginForm.value);
-
     const { email, password } = this.loginForm.value as LoginForm;
 
     this.auth.login(email, password).subscribe({
       next: (message) => this.toastService.success('Login realizado com sucesso!'),
-      error: (error) => this.submitError('Verifique os dados de login'),
+      error: (error: HttpErrorResponse) => this.submitError(error.error),
     });
   }
 
-  submitError(message: string) {
+  submitError(error: LoginErrorResponse) {
     this.loginForm.reset();
-    this.toastService.error(message);
+    this.toastService.error(`${error.status} - ${error.message}`);
   }
 
   navigate() {
