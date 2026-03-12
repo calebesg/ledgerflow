@@ -40,13 +40,15 @@ export class Signup {
   submit() {
     if (this.signUpForm.invalid) return;
 
-    const dataForm = this.signUpForm.value as SignupForm;
+    const { name, email, password, passwordConfirm } = this.signUpForm.value as SignupForm;
 
-    if (dataForm.password != dataForm.passwordConfirm) return;
+    if (password != passwordConfirm) return;
 
-    this.auth.register(dataForm.name, dataForm.email, dataForm.password).subscribe({
-      next: this.submitSucess,
-      error: this.submitError,
+    console.log({ name, email, password });
+
+    this.auth.register(name, email, password).subscribe({
+      next: (response) => this.submitSucess(response),
+      error: (error) => this.submitError(error),
     });
   }
 

@@ -40,9 +40,14 @@ export class Login {
     const { email, password } = this.loginForm.value as LoginForm;
 
     this.auth.login(email, password).subscribe({
-      next: (message) => this.toastService.success('Login realizado com sucesso!'),
+      next: (response) => this.submitSucess(),
       error: (error: HttpErrorResponse) => this.submitError(error.error),
     });
+  }
+
+  submitSucess() {
+    this.toastService.success('Login realizado com sucesso!');
+    this.router.navigateByUrl('/dashboard');
   }
 
   submitError(error: LoginErrorResponse) {

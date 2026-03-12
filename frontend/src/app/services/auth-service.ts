@@ -14,7 +14,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.httpClient
       .post<LoginResponse>(`${this.BASE_URL}/auth/login`, { email, password })
-      .pipe(tap(this.saveToken));
+      .pipe(tap((response) => this.saveToken(response)));
   }
 
   register(name: string, email: string, password: string) {
@@ -24,7 +24,7 @@ export class AuthService {
         email,
         password,
       })
-      .pipe(tap(this.saveToken));
+      .pipe(tap((response) => this.saveToken(response)));
   }
 
   private saveToken({ token }: LoginResponse) {
