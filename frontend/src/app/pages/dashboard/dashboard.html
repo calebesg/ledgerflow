@@ -1,1 +1,59 @@
-<p>dashboard works!</p>
+<app-default-container-layout>
+  <header class="text-center z-10">
+    <p class="text-2xl text-white">Controle Financeiro</p>
+    <a class="cursor-pointer" href="/login" routerLink="/login">Sair</a>
+  </header>
+
+  <main class="flex-1 mt-12 w-4xl m-auto z-10">
+    <section class="w-full flex items-center justify-between gap-4">
+      <h2 class="sr-only">Balanço</h2>
+
+      <app-summary-card
+        class="flex-1"
+        cardTitle="Entrada"
+        [amount]="10"
+        icon="ph-arrow-circle-up"
+        iconColor="text-green-500"
+      ></app-summary-card>
+      <app-summary-card
+        class="flex-1"
+        cardTitle="Dispesas"
+        [amount]="1000"
+        icon="ph-arrow-circle-down"
+        iconColor="text-red-500"
+      ></app-summary-card>
+      <app-summary-card
+        class="flex-1"
+        cardTitle="Caixa Total"
+        [amount]="10"
+        icon="ph-money-wavy"
+        iconColor="text-green-500"
+      ></app-summary-card>
+    </section>
+
+    <section class="block w-full overflow-x-auto">
+      <h2 class="sr-only">Transações</h2>
+
+      <a>+ nova transação</a>
+
+      <table class="w-full border-spacing-x-5 text-text">
+        <thead>
+          <th class="px-8 py-4 text-left">Descrição</th>
+          <th class="px-8 py-4 text-left">Valor</th>
+          <th class="px-8 py-4 text-left">Data</th>
+        </thead>
+
+        <tbody>
+          <tr class="opacity-70 hover:opacity-100">
+            <td>Compras do mercado</td>
+            <td>R$ 1200,00</td>
+            <td>23/03/2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p>dev.finance$</p>
+  </footer>
+</app-default-container-layout>

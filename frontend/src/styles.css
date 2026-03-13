@@ -2,6 +2,7 @@
 
 @import 'tailwindcss';
 @import 'ngx-toastr/toastr';
+@import '@phosphor-icons/web/regular/style.css';
 
 @theme {
   --color-primary: #7001fd;
