@@ -1,10 +1,9 @@
 <app-default-container-layout>
-  <header class="text-center z-10">
-    <p class="text-2xl text-white">Controle Financeiro</p>
+  <header class="self-end z-10">
     <a class="cursor-pointer" href="/login" routerLink="/login">Sair</a>
   </header>
 
-  <main class="flex-1 mt-12 w-4xl m-auto z-10">
+  <main class="flex-1 mt-20 w-4xl m-auto z-10">
     <section class="w-full flex items-center justify-between gap-4">
       <h2 class="sr-only">Balanço</h2>
 
@@ -27,33 +26,68 @@
         cardTitle="Caixa Total"
         [amount]="10"
         icon="ph-money-wavy"
-        iconColor="text-green-500"
+        iconColor="text-white"
+        textColor="text-white"
+        bgColor="bg-green-500"
       ></app-summary-card>
     </section>
 
     <section class="block w-full overflow-x-auto">
       <h2 class="sr-only">Transações</h2>
 
-      <a>+ nova transação</a>
+      <div class="flex justify-between items-center text-sm">
+        <button class="text-blue-800 hover:text-blue-600 flex items-center gap-0.5 cursor-pointer">
+          <i class="ph ph-plus"></i>
+          <span>nova transação</span>
+        </button>
 
-      <table class="w-full border-spacing-x-5 text-text">
-        <thead>
-          <th class="px-8 py-4 text-left">Descrição</th>
-          <th class="px-8 py-4 text-left">Valor</th>
-          <th class="px-8 py-4 text-left">Data</th>
+        <button
+          class="flex items-center gap-1 bg-text-smooth px-3 py-2 rounded cursor-pointer hover:opacity-80"
+        >
+          <i class="ph ph-file-pdf text-xl"></i>
+          <span>gerar relatório</span>
+        </button>
+      </div>
+
+      <table class="text-text text-sm font-light flex flex-col w-full gap-2 mt-3">
+        <thead class="bg-white p-2.5 text-left rounded flex">
+          <th class="flex-1">Descrição</th>
+          <th class="flex-1">Valor</th>
+          <th class="flex-1">Data</th>
+          <th></th>
         </thead>
 
-        <tbody>
-          <tr class="opacity-70 hover:opacity-100">
-            <td>Compras do mercado</td>
-            <td>R$ 1200,00</td>
-            <td>23/03/2026</td>
+        <tbody class="w-full flex flex-col gap-2 text-secondary-text">
+          <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
+            <td class="flex-1">Compras do mercado</td>
+            <td class="flex-1 text-green-600">R$ 1200,00</td>
+            <td class="flex-1">23/03/2026</td>
+            <td>
+              <button
+                class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
+              >
+                <i class="ph ph-minus-circle"></i>
+              </button>
+            </td>
+          </tr>
+
+          <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
+            <td class="flex-1">Compras do mercado</td>
+            <td class="flex-1 text-red-600">R$ 1200,00</td>
+            <td class="flex-1">23/03/2026</td>
+            <td>
+              <button
+                class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
+              >
+                <i class="ph ph-minus-circle"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </section>
   </main>
   <footer>
-    <p>dev.finance$</p>
+    <p>Personal.Finances</p>
   </footer>
 </app-default-container-layout>

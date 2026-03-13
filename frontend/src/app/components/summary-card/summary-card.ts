@@ -11,4 +11,6 @@ export class SummaryCard {
   @Input() amount: number = 0;
   @Input() icon: string = '';
   @Input() iconColor: string = '';
+  @Input() bgColor: string = 'bg-white';
+  @Input() textColor: string = 'text-text';
 }
