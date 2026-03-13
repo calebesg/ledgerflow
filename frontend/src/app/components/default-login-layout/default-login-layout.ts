@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PrimaryButton } from '../primary-button/primary-button';
 import { SecondaryButton } from '../secondary-button/secondary-button';
+import { DefaultContainerLayout } from '../default-container-layout/default-container-layout';
 
 @Component({
   selector: 'app-default-login-layout',
-  imports: [PrimaryButton, SecondaryButton],
+  imports: [PrimaryButton, SecondaryButton, DefaultContainerLayout],
   templateUrl: './default-login-layout.html',
   styleUrl: './default-login-layout.css',
 })
