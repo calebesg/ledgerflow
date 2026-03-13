@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 
-type InputTypes = 'text' | 'password' | 'email' | 'date';
+type InputTypes = 'text' | 'password' | 'email' | 'date' | 'number';
 
 @Component({
   selector: 'app-primary-input',

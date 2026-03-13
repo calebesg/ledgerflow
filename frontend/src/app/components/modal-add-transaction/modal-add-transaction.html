@@ -1,30 +1,39 @@
-<div class="modal-overlay">
-  <div class="modal">
-    <h2 class="mt-12 mb-3.5 text-primary">Nova Transação</h2>
+<div class="fixed inset-0 z-20 flex items-center bg-black/5 backdrop-blur-xs justify-center">
+  <div class="bg-white rounded-lg p-8 w-lg">
+    <h2 class="font-bold text-xl text-center text-text">Nova Transação</h2>
 
-    <form>
-      <div class="input-group">
-        <label class="sr-only" for="description">Descrição</label>
-        <input type="text" name="description" id="description" placeholder="Descrição" />
+    <form [formGroup]="formTransaction" class="mt-4 flex flex-col gap-4">
+      <app-primary-input
+        formName="description"
+        label="Descrição"
+        placeholder="descreva o valor"
+      ></app-primary-input>
+
+      <div class="flex items-center gap-4">
+        <app-primary-input
+          class="flex-1"
+          formName="amount"
+          label="Valor"
+          type="number"
+          step="0.01"
+          placeholder="R$ 200,00"
+        ></app-primary-input>
+        <app-primary-input
+          class="flex-1"
+          formName="date"
+          label="Data"
+          type="date"
+          placeholder="dia/mes/ano"
+        ></app-primary-input>
       </div>
 
-      <div class="input-group">
-        <label class="sr-only" for="amount">Valor</label>
-        <input type="number" step="0.01" name="amount" id="amount" placeholder="Valor" />
-
-        <small class="help">
-          Use o sinal - (negativo) para despesas e , para(vírgula) para casas decimais
-        </small>
-      </div>
-
-      <div class="input-group">
-        <label class="sr-only" for="date">Data</label>
-        <input type="date" name="date" id="date" />
-      </div>
-
-      <div class="input-group actions">
-        <a href="#" class="button cancel">Cancelar</a>
-        <button>Salvar</button>
+      <div class="flex items-center justify-between mt-8 gap-4">
+        <app-secondary-button
+          class="flex-1"
+          (click)="closeModal()"
+          text="Cancelar"
+        ></app-secondary-button>
+        <app-primary-button class="flex-1" text="Cadastrar"></app-primary-button>
       </div>
     </form>
   </div>
