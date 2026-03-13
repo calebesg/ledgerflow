@@ -20,4 +20,5 @@ export class PrimaryInput {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() formName: string = '';
+  @Input() icon: string = '';
 }

@@ -5,14 +5,19 @@
 
   <div class="w-full flex text-sm">
     <input
-      class="w-full h-11 rounded-l bg-light-gray px-3 text-md placeholder:text-tex outline-0"
+      class="w-full h-11 rounded bg-light-gray px-3 text-md text-text outline-0"
       [type]="type"
       [formControlName]="formName"
       [placeholder]="placeholder"
       required
     />
-    <div class="rounded-r p-3 bg-primary">
-      <ng-content></ng-content>
-    </div>
+
+    @if (icon) {
+      <div
+        class="flex items-center justify-center h-11 w-11 rounded bg-primary text-light-gray text-lg"
+      >
+        <i class="ph {{ icon }}"></i>
+      </div>
+    }
   </div>
 </div>

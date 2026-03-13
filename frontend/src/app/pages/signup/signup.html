@@ -7,22 +7,36 @@
   [disablePrimaryButton]="!signUpForm.invalid"
 >
   <form [formGroup]="signUpForm" class="w-full flex flex-col mt-12 gap-4">
-    <app-primary-input formName="name" type="text" label="Seu nome" placeholder="Pedro Doe">
-      <img class="h-5" src="icons/email.svg" aria-hidden="true" />
+    <app-primary-input
+      formName="name"
+      type="text"
+      label="Seu nome"
+      placeholder="Pedro Doe"
+      icon="ph-user"
+    >
     </app-primary-input>
-    <app-primary-input formName="email" type="email" label="E-mail" placeholder="Digite seu E-mail">
-      <img class="h-5" src="icons/email.svg" aria-hidden="true" />
+    <app-primary-input
+      formName="email"
+      type="email"
+      label="E-mail"
+      placeholder="Digite seu E-mail"
+      icon="ph-envelope-simple"
+    >
     </app-primary-input>
     <app-primary-input
       formName="password"
       type="password"
       label="Senha"
       placeholder="Digite sua senha"
+      icon="ph-lock-key"
     >
-      <img class="h-5" src="icons/lock.svg" aria-hidden="true" />
     </app-primary-input>
-    <app-primary-input formName="passwordConfirm" type="password" placeholder="Confirme sua senha">
-      <img class="h-5" src="icons/lock.svg" aria-hidden="true" />
+    <app-primary-input
+      formName="passwordConfirm"
+      type="password"
+      placeholder="Confirme sua senha"
+      icon="ph-lock-key"
+    >
     </app-primary-input>
   </form>
 </app-default-login-layout>

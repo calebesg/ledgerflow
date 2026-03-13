@@ -7,17 +7,21 @@
   [disablePrimaryButton]="!loginForm.invalid"
 >
   <form [formGroup]="loginForm" class="w-full flex flex-col mt-12 gap-4">
-    <app-primary-input formName="email" type="email" label="E-mail" placeholder="Digite seu E-mail">
-      <img class="h-5" src="icons/email.svg" aria-hidden="true" />
+    <app-primary-input
+      formName="email"
+      type="email"
+      label="E-mail"
+      placeholder="Digite seu E-mail"
+      icon="ph-envelope-simple"
+    >
     </app-primary-input>
     <app-primary-input
       formName="password"
       type="password"
       label="Senha"
       placeholder="Digite sua Senha"
-    >
-      <img class="h-5" src="icons/lock.svg" aria-hidden="true" />
-    </app-primary-input>
+      icon="ph-lock-key"
+    ></app-primary-input>
   </form>
   <a class="w-full text-end mt-2.5 text-sm text-secondary cursor-pointer hover:opacity-80">
     Esqueceu a senha?
