@@ -20,20 +20,33 @@
         ></app-primary-input>
         <app-primary-input
           class="flex-1"
-          formName="date"
+          formName="dateTransaction"
           label="Data"
           type="date"
           placeholder="dia/mes/ano"
         ></app-primary-input>
       </div>
 
+      <div class="flex-1 flex flex-col">
+        <label class="text-text font-bold text-sm" for="typeTransaction">Tipo de transação</label>
+        <select
+          class="text-text font-normal text-sm bg-light-gray outline-none rounded p-2 mt-1"
+          formControlName="typeTransaction"
+          id="typeTransaction"
+          aria-placeholder="tipo de transação"
+        >
+          <option value="INCOME">RECEITA</option>
+          <option value="EXPENSE">DESPESA</option>
+        </select>
+      </div>
+
       <div class="flex items-center justify-between mt-8 gap-4">
         <app-secondary-button
-          class="flex-1"
           (click)="closeModal()"
+          class="flex-1"
           text="Cancelar"
         ></app-secondary-button>
-        <app-primary-button class="flex-1" text="Cadastrar"></app-primary-button>
+        <app-primary-button (click)="submit()" class="flex-1" text="Cadastrar"></app-primary-button>
       </div>
     </form>
   </div>
