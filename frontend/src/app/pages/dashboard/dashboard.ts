@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { SummaryCard } from '../../components/summary-card/summary-card';
 import { RouterLink } from '@angular/router';
-import { DefaultContainerLayout } from '../../components/default-container-layout/default-container-layout';
-import { ModalAddTransaction } from '../../components/modal-add-transaction/modal-add-transaction';
+import { SummaryCard } from '../../shared/components/summary-card/summary-card';
+import { DefaultContainerLayout } from '../../shared/components/default-container-layout/default-container-layout';
+import { ModalAddTransaction } from '../../shared/components/modal-add-transaction/modal-add-transaction';
 
 @Component({
   selector: 'app-dashboard',

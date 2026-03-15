@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { DefaultLoginLayout } from '../../components/default-login-layout/default-login-layout';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PrimaryInput } from '../../components/primary-input/primary-input';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth-service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoginErrorResponse } from '../../types/login-response.type';
+import { LoginErrorResponse } from '../../shared/types/login-response.type';
+import { DefaultLoginLayout } from '../../shared/components/default-login-layout/default-login-layout';
+import { AuthService } from '../../core/services/auth-service';
+import { PrimaryInput } from '../../shared/components/primary-input/primary-input';
 
 type LoginForm = {
   email: string;

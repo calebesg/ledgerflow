@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DefaultLoginLayout } from '../../components/default-login-layout/default-login-layout';
-import { PrimaryInput } from '../../components/primary-input/primary-input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth-service';
 import { ToastrService } from 'ngx-toastr';
-import { LoginErrorResponse, LoginResponse } from '../../types/login-response.type';
+import { LoginErrorResponse, LoginResponse } from '../../shared/types/login-response.type';
+import { DefaultLoginLayout } from '../../shared/components/default-login-layout/default-login-layout';
+import { PrimaryInput } from '../../shared/components/primary-input/primary-input';
+import { AuthService } from '../../core/services/auth-service';
 
 type SignupForm = {
   name: string;
