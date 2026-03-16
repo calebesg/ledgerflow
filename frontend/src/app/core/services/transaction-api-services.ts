@@ -21,7 +21,7 @@ export class TransactionApiServices {
   getTransactions() {
     const token = sessionStorage.getItem('auth-token') || '';
 
-    return this.httpClient.get<Transaction[]>(`${this.BASE_URL}/transaciton`, {
+    return this.httpClient.get<Transaction[]>(`${this.BASE_URL}/transaction/list`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

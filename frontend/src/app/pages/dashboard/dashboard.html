@@ -61,31 +61,30 @@
         </thead>
 
         <tbody class="w-full flex flex-col gap-2 text-secondary-text">
-          <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
-            <td class="flex-1">Compras do mercado</td>
-            <td class="flex-1 text-green-600">R$ 1200,00</td>
-            <td class="flex-1">23/03/2026</td>
-            <td>
-              <button
-                class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
-              >
-                <i class="ph ph-minus-circle"></i>
-              </button>
-            </td>
-          </tr>
-
-          <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
-            <td class="flex-1">Compras do mercado</td>
-            <td class="flex-1 text-red-600">R$ 1200,00</td>
-            <td class="flex-1">23/03/2026</td>
-            <td>
-              <button
-                class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
-              >
-                <i class="ph ph-minus-circle"></i>
-              </button>
-            </td>
-          </tr>
+          @if (transactions$ | async; as transactions) {
+            @for (transaction of transactions; track transaction.id) {
+              <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
+                <td class="flex-1">{{ transaction.description }}</td>
+                <td
+                  [class]="
+                    transaction.transactionType == 'INCOME'
+                      ? 'flex-1 text-green-600'
+                      : 'flex-1 text-red-600'
+                  "
+                >
+                  R$ {{ transaction.amount | number: '1.2-2' : 'pt-BR' }}
+                </td>
+                <td class="flex-1">{{ transaction.transactionDate | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                  <button
+                    class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
+                  >
+                    <i class="ph ph-minus-circle"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          }
         </tbody>
       </table>
     </section>
