@@ -7,6 +7,7 @@ import { ModalAddTransaction } from '../../shared/components/modal-add-transacti
 import { TransactionStoreService } from '../../core/services/transaction-store-service';
 import { Transaction } from '../../shared/types/transaction.type';
 import { Observable } from 'rxjs';
+import { TransactionTypeEnum } from '../../core/enums/transaction-type.enum';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,14 +27,47 @@ export class Dashboard implements OnInit {
   visibilityTransactionModal: boolean = false;
   transactions$: Observable<Transaction[]> = new Observable();
 
+  transactionTypeEnum = TransactionTypeEnum;
+
   constructor(private store: TransactionStoreService) {
     this.transactions$ = store.transactions$;
   }
 
   ngOnInit(): void {
     this.store.loadTransactions();
+  }
 
-    console.log(this.transactions$);
+  getCurrentBalance() {
+    let currentBalance = 0;
+
+    this.transactions$.subscribe({
+      next: (data) =>
+        data.forEach((item) => {
+          if (item.transactionType == this.transactionTypeEnum.INCOME) {
+            currentBalance += item.amount;
+          } else if (item.transactionType == this.transactionTypeEnum.EXPENSE) {
+            currentBalance -= item.amount;
+          }
+        }),
+    });
+
+    return currentBalance;
+  }
+
+  getTotalTransactionType(type: TransactionTypeEnum) {
+    let total = 0;
+
+    this.transactions$.subscribe({
+      next: (data) => {
+        data.forEach((transaction) => {
+          if (transaction.transactionType == type) {
+            total += transaction.amount;
+          }
+        });
+      },
+    });
+
+    return total;
   }
 
   changeVisibilityModal() {

@@ -44,8 +44,6 @@ export class Signup {
 
     if (password != passwordConfirm) return;
 
-    console.log({ name, email, password });
-
     this.auth.register(name, email, password).subscribe({
       next: (response) => this.submitSucess(response),
       error: (error) => this.submitError(error),

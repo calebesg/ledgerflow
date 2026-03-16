@@ -3,5 +3,5 @@
     <span>{{ cardTitle }}</span>
     <i class="ph {{ icon }} text-2xl {{ iconColor }}"></i>
   </h3>
-  <p class="text-3xl">R$ {{ amount }}</p>
+  <p class="text-3xl">R$ {{ amount | number: '1.2-2' : 'pt-Br' }}</p>
 </div>

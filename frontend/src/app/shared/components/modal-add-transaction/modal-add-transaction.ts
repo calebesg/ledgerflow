@@ -6,6 +6,7 @@ import { PrimaryButton } from '../primary-button/primary-button';
 import { dateValidator } from '../../utils/date';
 import { TransactionForm } from '../../types/transaction-form.type';
 import { TransactionStoreService } from '../../../core/services/transaction-store-service';
+import { TransactionTypeEnum } from '../../../core/enums/transaction-type.enum';
 
 @Component({
   selector: 'app-modal-add-transaction',
@@ -23,7 +24,7 @@ export class ModalAddTransaction {
       description: new FormControl('', [Validators.maxLength(100), Validators.required]),
       amount: new FormControl('', [Validators.required]),
       transactionDate: new FormControl('', [Validators.required, dateValidator]),
-      transactionType: new FormControl<('INCOME' | 'EXPENSE') | null>(null, [Validators.required]),
+      transactionType: new FormControl<TransactionTypeEnum | null>(null, [Validators.required]),
     });
   }
 
