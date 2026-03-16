@@ -5,16 +5,12 @@ import calebesg.com.github.backend.domain.entity.User;
 import calebesg.com.github.backend.dto.TransactionRequestDTO;
 import calebesg.com.github.backend.dto.TransactionResponseDTO;
 import calebesg.com.github.backend.infrastructure.exception.TransactionNotFoundException;
-import calebesg.com.github.backend.infrastructure.exception.UserNotFoundException;
-import calebesg.com.github.backend.infrastructure.security.TokenService;
 import calebesg.com.github.backend.repositories.TransactionRepository;
-import calebesg.com.github.backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +23,8 @@ public class TransactionService {
         User user = userService.getAuthenticatedUser();
 
         var transaction = new Transaction();
-        transaction.setTransactionDate(dataTransaction.dataTransaction());
-        transaction.setTypeTransaction(dataTransaction.typeTransaction());
+        transaction.setTransactionDate(dataTransaction.transactionDate());
+        transaction.setTransactionType(dataTransaction.transactionType());
         transaction.setDescription(dataTransaction.description());
         transaction.setAmount(dataTransaction.amount());
         transaction.setUser(user);

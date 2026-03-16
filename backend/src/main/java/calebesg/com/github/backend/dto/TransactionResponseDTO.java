@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public record TransactionResponseDTO (
         Long id,
         String description,
-        LocalDate dataTransaction,
-        TransactionType typeTransaction,
+        LocalDate transactionDate,
+        TransactionType transactionType,
         BigDecimal amount
 ) {
     public static TransactionResponseDTO fromEntity(Transaction transaction) {
@@ -18,7 +18,7 @@ public record TransactionResponseDTO (
                 transaction.getId(),
                 transaction.getDescription(),
                 transaction.getTransactionDate(),
-                transaction.getTypeTransaction(),
+                transaction.getTransactionType(),
                 transaction.getAmount()
         );
     }

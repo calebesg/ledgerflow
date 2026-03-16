@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public record TransactionRequestDTO(
         String description,
-        LocalDate dataTransaction,
-        TransactionType typeTransaction,
+        LocalDate transactionDate,
+        TransactionType transactionType,
         BigDecimal amount
 ) {
 }

@@ -25,7 +25,7 @@ public class Transaction {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType typeTransaction;
+    private TransactionType transactionType;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
