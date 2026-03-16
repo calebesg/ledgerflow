@@ -45,9 +45,9 @@ public class UserService {
             throw new InvalidCredentialsException();
         }
 
-        String email = authentication.getName();
+        User user = (User) authentication.getPrincipal();
 
-        return userRepository.findByEmail(email)
+        return userRepository.findByEmail(user.getEmail())
                 .orElseThrow(UserNotFoundException::new);
     }
 }
