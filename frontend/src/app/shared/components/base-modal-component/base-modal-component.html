@@ -10,12 +10,12 @@
       <app-secondary-button
         (click)="cancel.emit()"
         class="flex-1"
-        text="Cancelar"
+        text="{{ textCancelButton }}"
       ></app-secondary-button>
       <app-primary-button
         (click)="confirm.emit()"
         class="flex-1"
-        text="Cadastrar"
+        text="{{ textConfirmButton }}"
       ></app-primary-button>
     </div>
   </div>

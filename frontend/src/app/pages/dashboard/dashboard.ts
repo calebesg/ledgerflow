@@ -6,13 +6,18 @@ import { DefaultContainerLayout } from '../../shared/components/default-containe
 import { BaseModalComponent } from '../../shared/components/base-modal-component/base-modal-component';
 import { TransactionStoreService } from '../../core/services/transaction-store-service';
 import { Transaction } from '../../shared/types/transaction.type';
-import { Observable } from 'rxjs';
+import { flatMap, Observable } from 'rxjs';
 import { TransactionTypeEnum } from '../../core/enums/transaction-type.enum';
 import { ToastrService } from 'ngx-toastr';
 import { PrimaryInput } from '../../shared/components/primary-input/primary-input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dateValidator } from '../../shared/utils/date';
 import { TransactionForm } from '../../shared/types/transaction-form.type';
+
+type ModalConfimation = {
+  visible: boolean;
+  refTransaction: Transaction | null;
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -33,9 +38,13 @@ import { TransactionForm } from '../../shared/types/transaction-form.type';
 })
 export class Dashboard implements OnInit {
   formTransaction!: FormGroup;
-
-  visibilityTransactionModal: boolean = false;
   transactions$: Observable<Transaction[]> = new Observable();
+
+  modalTransactionVisible: boolean = false;
+  modalConfirmation: ModalConfimation = {
+    visible: false,
+    refTransaction: null,
+  };
 
   transactionTypeEnum = TransactionTypeEnum;
 
@@ -90,15 +99,22 @@ export class Dashboard implements OnInit {
     return total;
   }
 
-  deleteTransaction(transaction: Transaction) {
-    const isConfirmed = confirm(
-      'Você realmente de seja apagar a transação ' + transaction.description,
-    );
+  openModalConfirmation(transaction: Transaction) {
+    this.modalConfirmation.visible = true;
+    this.modalConfirmation.refTransaction = transaction;
+  }
 
-    if (isConfirmed) {
-      this.store.removeTransaction(transaction.id);
-      this.toast.success('Transação apagada com sucesso!');
-    }
+  closeModalConfirmation() {
+    this.modalConfirmation.visible = false;
+    this.modalConfirmation.refTransaction = null;
+  }
+
+  confirmDeleteTransaction() {
+    if (this.modalConfirmation.refTransaction == null) return;
+
+    this.store.removeTransaction(this.modalConfirmation.refTransaction.id);
+    this.toast.success(`O item ${this.modalConfirmation.refTransaction.description} foi removido!`);
+    this.closeModalConfirmation();
   }
 
   submit(): void {
@@ -110,15 +126,15 @@ export class Dashboard implements OnInit {
     const payload: TransactionForm = { ...dataForm, transactionDate: dateISO };
 
     this.store.addTransaction(payload);
-    this.closeModel();
+    this.closeModalTransaction();
   }
 
-  openModel() {
-    this.visibilityTransactionModal = true;
+  openModalTransaction() {
+    this.modalTransactionVisible = true;
   }
 
-  closeModel() {
+  closeModalTransaction() {
     this.formTransaction.reset();
-    this.visibilityTransactionModal = false;
+    this.modalTransactionVisible = false;
   }
 }

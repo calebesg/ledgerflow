@@ -37,7 +37,7 @@
 
       <div class="flex justify-between items-center text-sm">
         <button
-          (click)="openModel()"
+          (click)="openModalTransaction()"
           class="text-blue-800 hover:text-blue-600 flex items-center gap-0.5 cursor-pointer"
         >
           <i class="ph ph-plus"></i>
@@ -76,7 +76,7 @@
               <td class="flex-1">{{ transaction.transactionDate | date: 'dd/MM/yyyy' }}</td>
               <td>
                 <button
-                  (click)="deleteTransaction(transaction)"
+                  (click)="openModalConfirmation(transaction)"
                   class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
                 >
                   <i class="ph ph-minus-circle"></i>
@@ -92,11 +92,13 @@
     <p>Personal.Finances</p>
   </footer>
 
-  @if (visibilityTransactionModal) {
+  @if (modalTransactionVisible) {
     <app-base-modal-component
       (confirm)="submit()"
-      (cancel)="closeModel()"
+      (cancel)="closeModalTransaction()"
       modalTitle="Nova Transação"
+      textConfirmButton="Cadastrar"
+      textCancelButton="Cancelar"
     >
       <form [formGroup]="formTransaction" class="mt-4 flex flex-col gap-4">
         <app-primary-input
@@ -136,6 +138,32 @@
           </select>
         </div>
       </form>
+    </app-base-modal-component>
+  }
+
+  @if (modalConfirmation.visible) {
+    <app-base-modal-component
+      [modalTitle]="`Você está prestes a Apagar um item!`"
+      (confirm)="confirmDeleteTransaction()"
+      (cancel)="closeModalConfirmation()"
+      textConfirmButton="Excluir"
+      textCancelButton="Cancelar"
+    >
+      <div class="flex flex-col justify-center items-center text-sm mt-6">
+        <p class="border rounded-lg border-text-smooth w-full p-4 text-text">
+          {{ modalConfirmation.refTransaction?.description }}
+        </p>
+        <div class="flex justify-between items-center w-full text-gray-500 text-xs mt-2">
+          <span
+            >Data {{ modalConfirmation.refTransaction?.transactionDate | date: 'dd/MM/yyyy' }}</span
+          >
+          <span
+            >Valor R${{
+              modalConfirmation.refTransaction?.amount | number: '1.2-2' : 'pt-BR'
+            }}</span
+          >
+        </div>
+      </div>
     </app-base-modal-component>
   }
 </app-default-container-layout>

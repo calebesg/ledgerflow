@@ -10,6 +10,8 @@ import { PrimaryButton } from '../primary-button/primary-button';
 })
 export class BaseModalComponent {
   @Input() modalTitle: string = '';
+  @Input() textConfirmButton: string = '';
+  @Input() textCancelButton: string = '';
 
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
