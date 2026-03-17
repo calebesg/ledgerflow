@@ -25,4 +25,12 @@ export class TransactionApiServices {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+
+  deleteTransaction(transactionId: number) {
+    const token = sessionStorage.getItem('auth-token') || '';
+
+    return this.httpClient.delete(`${this.BASE_URL}/transaction/${transactionId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }

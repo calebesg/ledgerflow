@@ -77,6 +77,7 @@
                 <td class="flex-1">{{ transaction.transactionDate | date: 'dd/MM/yyyy' }}</td>
                 <td>
                   <button
+                    (click)="deleteTransaction(transaction)"
                     class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
                   >
                     <i class="ph ph-minus-circle"></i>

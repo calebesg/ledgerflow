@@ -8,6 +8,7 @@ import { TransactionStoreService } from '../../core/services/transaction-store-s
 import { Transaction } from '../../shared/types/transaction.type';
 import { Observable } from 'rxjs';
 import { TransactionTypeEnum } from '../../core/enums/transaction-type.enum';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ import { TransactionTypeEnum } from '../../core/enums/transaction-type.enum';
     DatePipe,
     DecimalPipe,
   ],
+  providers: [ToastrService],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -29,7 +31,10 @@ export class Dashboard implements OnInit {
 
   transactionTypeEnum = TransactionTypeEnum;
 
-  constructor(private store: TransactionStoreService) {
+  constructor(
+    private store: TransactionStoreService,
+    private toast: ToastrService,
+  ) {
     this.transactions$ = store.transactions$;
   }
 
@@ -68,6 +73,17 @@ export class Dashboard implements OnInit {
     });
 
     return total;
+  }
+
+  deleteTransaction(transaction: Transaction) {
+    const isConfirmed = confirm(
+      'Você realmente de seja apagar a transação ' + transaction.description,
+    );
+
+    if (isConfirmed) {
+      this.store.removeTransaction(transaction.id);
+      this.toast.success('Transação apagada com sucesso!');
+    }
   }
 
   changeVisibilityModal() {

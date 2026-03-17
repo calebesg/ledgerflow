@@ -26,4 +26,14 @@ export class TransactionStoreService {
       error: (error) => console.warn(`ADD TRANSACTION: ${error}`),
     });
   }
+
+  removeTransaction(transactionId: number) {
+    this.api.deleteTransaction(transactionId).subscribe({
+      next: (response) =>
+        this.transactionsSubject.next(
+          this.transactionsSubject.value.filter((transaction) => transaction.id != transactionId),
+        ),
+      error: (error) => console.warn(`DELETE TRANSACTION: ${error}`),
+    });
+  }
 }
