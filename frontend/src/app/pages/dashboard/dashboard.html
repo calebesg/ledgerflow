@@ -37,7 +37,7 @@
 
       <div class="flex justify-between items-center text-sm">
         <button
-          (click)="changeVisibilityModal()"
+          (click)="openModel()"
           class="text-blue-800 hover:text-blue-600 flex items-center gap-0.5 cursor-pointer"
         >
           <i class="ph ph-plus"></i>
@@ -61,30 +61,28 @@
         </thead>
 
         <tbody class="w-full flex flex-col gap-2 text-secondary-text">
-          @if (transactions$ | async; as transactions) {
-            @for (transaction of transactions; track transaction.id) {
-              <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
-                <td class="flex-1">{{ transaction.description }}</td>
-                <td
-                  [class]="
-                    transaction.transactionType == transactionTypeEnum.INCOME
-                      ? 'flex-1 text-green-600'
-                      : 'flex-1 text-red-600'
-                  "
+          @for (transaction of transactions$ | async; track transaction.id) {
+            <tr class="bg-white flex items-center p-2.5 rounded hover:opacity-70">
+              <td class="flex-1">{{ transaction.description }}</td>
+              <td
+                [class]="
+                  transaction.transactionType == transactionTypeEnum.INCOME
+                    ? 'flex-1 text-green-600'
+                    : 'flex-1 text-red-600'
+                "
+              >
+                R$ {{ transaction.amount | number: '1.2-2' : 'pt-BR' }}
+              </td>
+              <td class="flex-1">{{ transaction.transactionDate | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <button
+                  (click)="deleteTransaction(transaction)"
+                  class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
                 >
-                  R$ {{ transaction.amount | number: '1.2-2' : 'pt-BR' }}
-                </td>
-                <td class="flex-1">{{ transaction.transactionDate | date: 'dd/MM/yyyy' }}</td>
-                <td>
-                  <button
-                    (click)="deleteTransaction(transaction)"
-                    class="text-red-400 hover:text-red-600 cursor-pointer text-xl p-0 flex items-center justify-center"
-                  >
-                    <i class="ph ph-minus-circle"></i>
-                  </button>
-                </td>
-              </tr>
-            }
+                  <i class="ph ph-minus-circle"></i>
+                </button>
+              </td>
+            </tr>
           }
         </tbody>
       </table>
@@ -95,6 +93,49 @@
   </footer>
 
   @if (visibilityTransactionModal) {
-    <app-modal-add-transaction (closeModal)="changeVisibilityModal()"></app-modal-add-transaction>
+    <app-base-modal-component
+      (confirm)="submit()"
+      (cancel)="closeModel()"
+      modalTitle="Nova Transação"
+    >
+      <form [formGroup]="formTransaction" class="mt-4 flex flex-col gap-4">
+        <app-primary-input
+          formName="description"
+          label="Descrição"
+          placeholder="descreva o valor"
+        ></app-primary-input>
+
+        <div class="flex items-center gap-4">
+          <app-primary-input
+            class="flex-1"
+            formName="amount"
+            label="Valor"
+            type="number"
+            step="0.01"
+            placeholder="R$ 200,00"
+          ></app-primary-input>
+          <app-primary-input
+            class="flex-1"
+            formName="transactionDate"
+            label="Data"
+            type="date"
+            placeholder="dia/mes/ano"
+          ></app-primary-input>
+        </div>
+
+        <div class="flex-1 flex flex-col">
+          <label class="text-text font-bold text-sm" for="transactionType">Tipo de transação</label>
+          <select
+            class="text-text font-normal text-sm bg-light-gray outline-none rounded p-2 mt-1"
+            formControlName="transactionType"
+            id="transactionType"
+            aria-placeholder="tipo de transação"
+          >
+            <option [value]="transactionTypeEnum.INCOME">RECEITA</option>
+            <option [value]="transactionTypeEnum.EXPENSE">DESPESA</option>
+          </select>
+        </div>
+      </form>
+    </app-base-modal-component>
   }
 </app-default-container-layout>
