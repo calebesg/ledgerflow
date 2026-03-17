@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    List<Transaction> findByUser_IdAndDeletedAtIsNull(String id);
+    List<Transaction> findByUser_IdAndDeletedAtIsNullOrderByTransactionDateDesc(String id);
     Optional<Transaction> findByUser_IdAndIdAndDeletedAtIsNull(String userId, Long id);
 }

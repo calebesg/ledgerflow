@@ -34,7 +34,7 @@ public class TransactionService {
 
     public List<TransactionResponseDTO> getAllTransactions() {
         User user = userService.getAuthenticatedUser();
-        List<Transaction> transactions = transactionRepository.findByUser_IdAndDeletedAtIsNull(user.getId());
+        List<Transaction> transactions = transactionRepository.findByUser_IdAndDeletedAtIsNullOrderByTransactionDateDesc(user.getId());
         return transactions.stream().map(TransactionResponseDTO::fromEntity).toList();
     }
 
