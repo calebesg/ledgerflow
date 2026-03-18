@@ -3,26 +3,26 @@
     <a class="cursor-pointer" href="/login" routerLink="/login">Sair</a>
   </header>
 
-  <main class="flex-1 mt-20 w-4xl m-auto z-10">
-    <section class="w-full flex items-center justify-between gap-4">
+  <main class="flex-1 mt-20 w-full z-10 lg:w-4xl">
+    <section class="w-full flex flex-col items-center justify-between gap-4 md:flex-row">
       <h2 class="sr-only">Balanço</h2>
 
       <app-summary-card
-        class="flex-1"
+        class="w-full"
         cardTitle="Entrada"
         [amount]="getTotalTransactionType(transactionTypeEnum.INCOME)"
         icon="ph-arrow-circle-up"
         iconColor="text-green-500"
       ></app-summary-card>
       <app-summary-card
-        class="flex-1"
+        class="w-full"
         cardTitle="Dispesas"
         [amount]="getTotalTransactionType(transactionTypeEnum.EXPENSE)"
         icon="ph-arrow-circle-down"
         iconColor="text-red-500"
       ></app-summary-card>
       <app-summary-card
-        class="flex-1"
+        class="w-full"
         cardTitle="Caixa Total"
         [amount]="getCurrentBalance()"
         icon="ph-money-wavy"
@@ -32,7 +32,7 @@
       ></app-summary-card>
     </section>
 
-    <section class="block w-full overflow-x-auto">
+    <section class="flex flex-col w-full overflow-x-auto mt-16">
       <h2 class="sr-only">Transações</h2>
 
       <div class="flex justify-between items-center text-sm">
@@ -88,7 +88,7 @@
       </table>
     </section>
   </main>
-  <footer>
+  <footer class="mt-12">
     <p>Personal.Finances</p>
   </footer>
 
