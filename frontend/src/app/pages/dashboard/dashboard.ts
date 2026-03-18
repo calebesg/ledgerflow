@@ -13,6 +13,7 @@ import { PrimaryInput } from '../../shared/components/primary-input/primary-inpu
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dateValidator } from '../../shared/utils/date';
 import { TransactionForm } from '../../shared/types/transaction-form.type';
+import { PdfService } from '../../core/services/pdf-service';
 
 type ModalConfimation = {
   visible: boolean;
@@ -51,6 +52,7 @@ export class Dashboard implements OnInit {
   constructor(
     private store: TransactionStoreService,
     private toast: ToastrService,
+    private pdfService: PdfService,
   ) {
     this.transactions$ = store.transactions$;
 
@@ -136,5 +138,11 @@ export class Dashboard implements OnInit {
   closeModalTransaction() {
     this.formTransaction.reset();
     this.modalTransactionVisible = false;
+  }
+
+  generatePdf() {
+    this.transactions$.forEach((transactions) =>
+      this.pdfService.generateTransactionsReport(transactions),
+    );
   }
 }
