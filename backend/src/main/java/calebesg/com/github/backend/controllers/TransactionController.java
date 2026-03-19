@@ -3,6 +3,7 @@ package calebesg.com.github.backend.controllers;
 import calebesg.com.github.backend.dto.TransactionRequestDTO;
 import calebesg.com.github.backend.dto.TransactionResponseDTO;
 import calebesg.com.github.backend.services.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping("/new")
-    public ResponseEntity<TransactionResponseDTO> createTransaction(@RequestBody TransactionRequestDTO body) {
+    public ResponseEntity<TransactionResponseDTO> createTransaction(@RequestBody @Valid TransactionRequestDTO body) {
         return ResponseEntity.ok(transactionService.createTransaction(body));
     }
 

@@ -4,6 +4,7 @@ import calebesg.com.github.backend.dto.LoginRequestDTO;
 import calebesg.com.github.backend.dto.AuthResponseDTO;
 import calebesg.com.github.backend.dto.RegisterRequestDTO;
 import calebesg.com.github.backend.services.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +20,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO body) {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody @Valid LoginRequestDTO body) {
         return ResponseEntity.ok(authService.login(body.email(), body.password()));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterRequestDTO body) {
+    public ResponseEntity<AuthResponseDTO> register(@RequestBody @Valid RegisterRequestDTO body) {
         return ResponseEntity.ok(authService.register(body));
     }
 }
