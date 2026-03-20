@@ -6,13 +6,7 @@ import { LoginErrorResponse, LoginResponse } from '../../shared/types/login-resp
 import { DefaultLoginLayout } from '../../shared/components/default-login-layout/default-login-layout';
 import { PrimaryInput } from '../../shared/components/primary-input/primary-input';
 import { AuthService } from '../../core/services/auth-service';
-
-type SignupForm = {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-};
+import { RegisterRequestDTO } from '../../shared/dto/register-request-dto.type';
 
 @Component({
   selector: 'app-signup',
@@ -34,17 +28,21 @@ export class Signup {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)]),
+
+      organizationName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      purpose: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      reportTitle: new FormControl('', [Validators.required, Validators.minLength(3)]),
     });
   }
 
   submit() {
     if (this.signUpForm.invalid) return;
 
-    const { name, email, password, passwordConfirm } = this.signUpForm.value as SignupForm;
+    const registerDto = this.signUpForm.value as RegisterRequestDTO;
 
-    if (password != passwordConfirm) return;
+    if (registerDto.password != registerDto.passwordConfirm) return;
 
-    this.auth.register(name, email, password).subscribe({
+    this.auth.register(registerDto).subscribe({
       next: (response) => this.submitSucess(response),
       error: (error) => this.submitError(error),
     });

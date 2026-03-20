@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { pipe, tap } from 'rxjs';
 import { LoginResponse } from '../../shared/types/login-response.type';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { RegisterRequestDTO } from '../../shared/dto/register-request-dto.type';
 
 @Injectable({
   providedIn: 'root',
@@ -18,13 +19,9 @@ export class AuthService {
       .pipe(tap((response) => this.saveToken(response.token)));
   }
 
-  register(name: string, email: string, password: string) {
+  register(data: RegisterRequestDTO) {
     return this.httpClient
-      .post<LoginResponse>(`${this.BASE_URL}/auth/register`, {
-        name,
-        email,
-        password,
-      })
+      .post<LoginResponse>(`${this.BASE_URL}/auth/register`, data)
       .pipe(tap((response) => this.saveToken(response.token)));
   }
 

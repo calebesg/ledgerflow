@@ -6,37 +6,68 @@
   (navigate)="navigateToLogin()"
   [disablePrimaryButton]="!signUpForm.invalid"
 >
-  <form [formGroup]="signUpForm" class="w-full flex flex-col mt-12 gap-4">
-    <app-primary-input
-      formName="name"
-      type="text"
-      label="Seu nome"
-      placeholder="Pedro Doe"
-      icon="ph-user"
-    >
-    </app-primary-input>
-    <app-primary-input
-      formName="email"
-      type="email"
-      label="E-mail"
-      placeholder="Digite seu E-mail"
-      icon="ph-envelope-simple"
-    >
-    </app-primary-input>
-    <app-primary-input
-      formName="password"
-      type="password"
-      label="Senha"
-      placeholder="Digite sua senha"
-      icon="ph-lock-key"
-    >
-    </app-primary-input>
-    <app-primary-input
-      formName="passwordConfirm"
-      type="password"
-      placeholder="Confirme sua senha"
-      icon="ph-lock-key"
-    >
-    </app-primary-input>
+  <form [formGroup]="signUpForm" class="w-full flex flex-col md:flex-row mt-12 gap-8">
+    <div class="flex-1 flex flex-col gap-4">
+      <h2 class="text-gray-700 text-md text-center mb-4">Dados do Usuário</h2>
+      <app-primary-input
+        formName="name"
+        type="text"
+        label="Seu nome"
+        placeholder="Pedro Doe"
+        icon="ph-user"
+      >
+      </app-primary-input>
+      <app-primary-input
+        formName="email"
+        type="email"
+        label="E-mail"
+        placeholder="Digite seu E-mail"
+        icon="ph-envelope-simple"
+      >
+      </app-primary-input>
+      <app-primary-input
+        formName="password"
+        type="password"
+        label="Senha"
+        placeholder="Digite sua senha"
+        icon="ph-lock-key"
+      >
+      </app-primary-input>
+      <app-primary-input
+        formName="passwordConfirm"
+        type="password"
+        placeholder="Confirme sua senha"
+        icon="ph-lock-key"
+      >
+      </app-primary-input>
+    </div>
+
+    <div class="flex-1 flex flex-col gap-4">
+      <h2 class="text-gray-700 text-md text-center mb-4">Dados da Organização</h2>
+      <app-primary-input
+        formName="organizationName"
+        type="text"
+        label="Nome"
+        placeholder="Dominio do negócio"
+        icon="ph-user"
+      >
+      </app-primary-input>
+      <app-primary-input
+        formName="purpose"
+        type="text"
+        label="Finalidade"
+        placeholder="Controlar finanças"
+        icon="ph-user"
+      >
+      </app-primary-input>
+      <app-primary-input
+        formName="reportTitle"
+        type="text"
+        label="Titulo para relatório"
+        placeholder="Balancete de movimentação"
+        icon="ph-user"
+      >
+      </app-primary-input>
+    </div>
   </form>
 </app-default-login-layout>
