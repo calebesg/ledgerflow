@@ -124,7 +124,7 @@ export class Dashboard implements OnInit {
 
     const dataForm = this.formTransaction.value as TransactionForm;
 
-    const dateISO = new Date(dataForm.transactionDate).toISOString();
+    const dateISO = new Date(dataForm.transactionDate).toISOString().split('T')[0];
     const payload: TransactionForm = { ...dataForm, transactionDate: dateISO };
 
     this.store.addTransaction(payload);
@@ -141,8 +141,6 @@ export class Dashboard implements OnInit {
   }
 
   generatePdf() {
-    this.transactions$.forEach((transactions) =>
-      this.pdfService.generateTransactionsReport(transactions),
-    );
+    this.pdfService.generateTransactionsReport();
   }
 }
