@@ -17,7 +17,7 @@ public record TransactionRequestDTO(
         String description,
 
         @NotNull(message = "Data da transação é obrigatória")
-        @PastOrPresent
+        @PastOrPresent(message = "A data informada deve ser uma data atual ou passada")
         @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate transactionDate,
 
